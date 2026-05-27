@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VILLA LUMINA — Between Sea and Cenote</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAWIGACJA
+  ═══════════════════════════════════════════ -->
+  <nav id="nav">
+    <div class="nav-logo">VILLA LUMINA</div>
+    <div class="nav-menu">
+      <a href="#overview">OVERVIEW</a>
+      <a href="#gallery">GALLERY</a>
+      <a href="#contact">RESERVE</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       SEKCJA 1 — HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <span class="hero-label" data-anim="fade-up">TULUM · QUINTANA ROO · MÉXICO</span>
+      <h1 class="hero-title" data-anim="fade-up" data-delay="0.1">
+        VILLA<br>LUMINA
+      </h1>
+      <p class="hero-sub" data-anim="fade-up" data-delay="0.25">
+        A private concrete refuge<br>drawn along old Mayan ground
+      </p>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span class="hint-label">SCROLL</span>
+      <div class="hint-line"></div>
+    </div>
+
+    <div class="hero-bottom-bar">
+      <span>21°08′N · 86°46′W</span>
+      <span>5 200 M²</span>
+      <span>EST. 2024</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SEKCJA 2 — DRONE SEQUENCE (Canvas)
+  ═══════════════════════════════════════════ -->
+  <section id="drone-section" class="sequence-wrapper">
+    <div class="sequence-sticky">
+
+      <!-- Canvas gdzie rysujemy klatki -->
+      <canvas id="drone-canvas"></canvas>
+
+      <!-- Ciemna winieta -->
+      <div class="canvas-vignette"></div>
+
+      <!-- Tekst animowany na scrollu -->
+      <div class="sequence-texts">
+        <div class="seq-text" id="seq-text-0">
+          <span class="seq-label">THE PROPERTY</span>
+          <h2>Between<br>Sea &amp;<br>Cenote</h2>
+        </div>
+        <div class="seq-text hidden" id="seq-text-1">
+          <span class="seq-label">5 200 M²</span>
+          <h2>Private<br>Jungle<br>Reserve</h2>
+        </div>
+        <div class="seq-text hidden" id="seq-text-2">
+          <span class="seq-label">THE SITE</span>
+          <h2>Infinity<br>Pool<br>Edge</h2>
+        </div>
+      </div>
+
+      <!-- Pasek postępu na dole -->
+      <div class="sequence-progress">
+        <div class="progress-bar" id="drone-progress-bar"></div>
+      </div>
+
+      <!-- Loading state -->
+      <div class="canvas-loading" id="drone-loading">
+        <div class="loading-spinner"></div>
+        <span>Loading experience…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SEKCJA 3 — OVERHEAD MAP + ADNOTACJE SVG
+  ═══════════════════════════════════════════ -->
+  <section id="overhead-section">
+    <div class="overhead-inner">
+
+      <!-- Lewa kolumna: tytuł -->
+      <div class="overhead-copy">
+        <span class="section-label anim-item">THE CONCEPT</span>
+        <h2 class="anim-item">BETWEEN<br>SEA AND<br>CENOTE</h2>
+        <p class="overhead-desc anim-item">
+          A private concrete refuge<br>
+          drawn along old Tarcuneon axes
+        </p>
+        <div class="overhead-tabs">
+
+          <div class="overhead-tab active anim-item" data-tab="beach">
+            <div class="tab-header">
+              <span class="stat-label">BEACH</span>
+              <span class="tab-icon"><span></span><span></span></span>
+            </div>
+            <div class="tab-body">
+              <p>White sand shoreline stretching 200&nbsp;m along the Caribbean coast. Direct private access from the villa grounds.</p>
+            </div>
+          </div>
+
+          <div class="overhead-tab anim-item" data-tab="villa">
+            <div class="tab-header">
+              <span class="stat-label">VILLA</span>
+              <span class="tab-icon"><span></span><span></span></span>
+            </div>
+            <div class="tab-body">
+              <p>1&nbsp;400&nbsp;m² of refined concrete architecture. Five suites, infinity pool, open-air dining pavilion.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Prawa kolumna: zdjęcie z adnotacjami -->
+      <div class="overhead-map">
+
+        <!-- Stos 3 zdjęć — jedno widoczne naraz -->
+        <div class="map-image-stack">
+          <img
+            class="map-img active"
+            data-img="beach"
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=80"
+            alt="Private beach"
+            crossorigin="anonymous"
+          >
+          <img
+            class="map-img"
+            data-img="villa"
+            src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1400&q=80"
+            alt="Villa aerial view"
+            crossorigin="anonymous"
+          >
+        </div>
+
+        <!-- SVG overlay z liniami i etykietami -->
+        <svg id="annotations-svg" viewBox="0 0 1000 650" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Corner plus markers -->
+          <g class="plus-marker" transform="translate(24,24)">
+            <line x1="-9" y1="0" x2="9" y2="0"/>
+            <line x1="0" y1="-9" x2="0" y2="9"/>
+          </g>
+          <g class="plus-marker" transform="translate(976,24)">
+            <line x1="-9" y1="0" x2="9" y2="0"/>
+            <line x1="0" y1="-9" x2="0" y2="9"/>
+          </g>
+          <g class="plus-marker" transform="translate(24,626)">
+            <line x1="-9" y1="0" x2="9" y2="0"/>
+            <line x1="0" y1="-9" x2="0" y2="9"/>
+          </g>
+          <g class="plus-marker" transform="translate(976,626)">
+            <line x1="-9" y1="0" x2="9" y2="0"/>
+            <line x1="0" y1="-9" x2="0" y2="9"/>
+          </g>
+
+          <!-- Crosshair 1 -->
+          <g class="crosshair" transform="translate(720, 140)">
+            <circle class="ann-circle" r="22"/>
+            <line class="ann-line-el" x1="-35" y1="0" x2="35" y2="0"/>
+            <line class="ann-line-el" x1="0" y1="-35" x2="0" y2="35"/>
+          </g>
+
+          <!-- Crosshair 2 -->
+          <g class="crosshair" transform="translate(210, 510)">
+            <circle class="ann-circle" r="16"/>
+            <line class="ann-line-el" x1="-25" y1="0" x2="25" y2="0"/>
+            <line class="ann-line-el" x1="0" y1="-25" x2="0" y2="25"/>
+          </g>
+
+          <!-- Linia → PRIVATE BUFFER -->
+          <line class="annotation-line" id="line-1" x1="210" y1="165" x2="370" y2="200"/>
+          <line class="annotation-line" id="line-1b" x1="370" y1="200" x2="440" y2="200"/>
+
+          <!-- Linia → OVERHANGING CENOTE -->
+          <line class="annotation-line" id="line-2" x1="710" y1="125" x2="580" y2="175"/>
+          <line class="annotation-line" id="line-2b" x1="580" y1="175" x2="560" y2="175"/>
+
+          <!-- Linia → BEACH -->
+          <line class="annotation-line" id="line-3" x1="145" y1="395" x2="280" y2="360"/>
+          <line class="annotation-line" id="line-3b" x1="280" y1="360" x2="340" y2="360"/>
+
+          <!-- Linia → INFINITY POOL LINE -->
+          <line class="annotation-line" id="line-4" x1="500" y1="465" x2="500" y2="400"/>
+          <line class="annotation-line" id="line-4b" x1="460" y1="400" x2="545" y2="400"/>
+
+          <!-- Linia → STONE BATH -->
+          <line class="annotation-line" id="line-5" x1="740" y1="340" x2="710" y2="400"/>
+          <line class="annotation-line" id="line-5b" x1="710" y1="400" x2="760" y2="400"/>
+
+        </svg>
+
+        <!-- Etykiety tekstowe -->
+        <div class="ann-label" id="ann-1" style="top:27%;left:43%">PRIVATE BUFFER</div>
+        <div class="ann-label" id="ann-2" style="top:23%;right:29%">OVERHANGING CENOTE</div>
+        <div class="ann-label" id="ann-3" style="top:51%;left:32%">BEACH</div>
+        <div class="ann-label" id="ann-4" style="top:57%;left:42%">INFINITY POOL LINE</div>
+        <div class="ann-label" id="ann-5" style="top:57%;right:20%">STONE BATH</div>
+
+        <!-- Villa label dolny lewy -->
+        <div class="ann-label villa-label" id="ann-villa" style="bottom:18%;left:6%">VILLA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SEKCJA 4 — GARDEN ARRIVAL (Canvas)
+  ═══════════════════════════════════════════ -->
+  <section id="garden-section" class="sequence-wrapper">
+    <div class="sequence-sticky">
+
+      <canvas id="garden-canvas"></canvas>
+      <div class="canvas-vignette garden-vignette"></div>
+
+      <!-- Overlay z tekstem -->
+      <div class="garden-overlay">
+        <div class="garden-title">
+          <span class="seq-label" id="garden-label">THE ARRIVAL</span>
+          <h2 id="garden-heading">The<br>Garden<br>Arrival</h2>
+          <p class="garden-desc" id="garden-desc">
+            A path through green corridors<br>cut toward the sea
+          </p>
+        </div>
+
+        <!-- Dolny pasek z informacjami -->
+        <div class="garden-info-bar">
+          <div class="garden-coords">
+            <span>20.2110° N</span>
+            <span>87.4458° W</span>
+          </div>
+          <div class="garden-inquiry">
+            <a href="#contact" class="inquiry-btn">DATE INQUIRY</a>
+          </div>
+          <div class="garden-dates">
+            <span>17 JUN – 24 JUN</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sequence-progress">
+        <div class="progress-bar" id="garden-progress-bar"></div>
+      </div>
+
+      <div class="canvas-loading" id="garden-loading">
+        <div class="loading-spinner"></div>
+        <span>Loading experience…</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SEKCJA 5 — GALERIA
+  ═══════════════════════════════════════════ -->
+  <section id="gallery">
+    <div class="gallery-header">
+      <span class="section-label anim-item">THE SPACES</span>
+      <h2 class="anim-item">Interior<br>Moments</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- GALERIA: taras → wnętrze → widok lotniczy → infinity pool -->
+      <div class="gallery-item large anim-item">
+        <img
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1400&q=80"
+          alt="Villa terrace with pool"
+          loading="lazy"
+        >
+        <div class="gallery-caption">THE TERRACE</div>
+      </div>
+      <div class="gallery-item anim-item">
+        <img
+          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80"
+          alt="Main suite interior"
+          loading="lazy"
+        >
+        <div class="gallery-caption">MAIN SUITE</div>
+      </div>
+      <div class="gallery-item anim-item">
+        <img
+          src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80"
+          alt="Villa at dusk"
+          loading="lazy"
+        >
+        <div class="gallery-caption">THE GROUNDS</div>
+      </div>
+      <div class="gallery-item anim-item">
+        <img
+          src="https://images.unsplash.com/photo-1549439602-43ebca2327af?w=900&q=80"
+          alt="Infinity pool edge"
+          loading="lazy"
+        >
+        <div class="gallery-caption">INFINITY EDGE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SEKCJA 6 — DATE INQUIRY / KONTAKT
+  ═══════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="contact-visual">
+      <img
+        src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80"
+        alt="Villa at dusk"
+        loading="lazy"
+      >
+      <div class="contact-visual-overlay"></div>
+    </div>
+
+    <div class="contact-content">
+      <span class="section-label anim-item">RESERVATIONS</span>
+      <h2 class="anim-item">Date<br>Inquiry</h2>
+
+      <form class="contact-form anim-item" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>ARRIVAL DATE</label>
+            <input type="text" placeholder="DD / MM / YYYY">
+          </div>
+          <div class="form-group">
+            <label>DEPARTURE DATE</label>
+            <input type="text" placeholder="DD / MM / YYYY">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>NUMBER OF GUESTS</label>
+            <input type="number" placeholder="2" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label>EMAIL ADDRESS</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label>MESSAGE (OPTIONAL)</label>
+          <textarea placeholder="Special requests, questions…" rows="3"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span>SEND INQUIRY</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="contact-details anim-item">
+        <div class="contact-detail">
+          <span class="detail-label">EMAIL</span>
+          <a href="mailto:hello@villalumina.mx">hello@villalumina.mx</a>
+        </div>
+        <div class="contact-detail">
+          <span class="detail-label">PHONE</span>
+          <a href="tel:+529840000000">+52 984 000 0000</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-left">
+      <span class="footer-logo">VILLA LUMINA</span>
+      <span class="footer-location">TULUM · QUINTANA ROO · MÉXICO</span>
+    </div>
+    <div class="footer-center">
+      <span>© <span id="footer-year"></span> Villa Lumina. All rights reserved.</span>
+    </div>
+    <div class="footer-right">
+      <a href="#hero">↑ TOP</a>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════ -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
